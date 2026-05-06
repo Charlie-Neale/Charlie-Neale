@@ -2,13 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+html, body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
   --red: #FF0000;
-  --black: #1a1a1a;
+  --black: #000000; /* Pure black */
   --white: #FFFFFF;
   --gold: #FFD700;
 }
@@ -16,12 +20,52 @@ html {
 body {
   background-color: var(--black);
   color: var(--white);
-  /* Subtle halftone dot pattern */
-  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-  background-size: 8px 8px;
+  /* Enhanced halftone pattern overlay */
+  background-image: radial-gradient(rgba(255, 0, 0, 0.18) 2px, transparent 2.5px);
+  background-size: 12px 12px;
 }
 
 ::selection {
   background-color: var(--red);
   color: var(--white);
+}
+
+/* Custom P5 Red Crosshair Cursor */
+a, button, input, textarea, .p5-interactive {
+  cursor: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23FF0000" stroke-width="2" xmlns="http://www.w3.org/2000/svg"><path d="M12 2v20M2 12h20"/></svg>') 12 12, pointer;
+}
+
+/* Custom aggressive scrollbar for internal section panels */
+.p5-scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+.p5-scrollbar::-webkit-scrollbar-track {
+  background: var(--black);
+  border-left: 2px solid #333;
+}
+.p5-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--red);
+  border-left: 2px solid #333;
+}
+
+/* Idle Pulse for Map Glow */
+@keyframes boltPulse {
+  0%, 100% { opacity: 0.10; }
+  50% { opacity: 0.18; }
+}
+.bolt-pulse {
+  animation: boltPulse 3s ease-in-out infinite;
+}
+
+/* P5 Aggressive Heading Style */
+.p5-heading {
+  -webkit-text-fill-color: var(--red);
+  -webkit-text-stroke: 3px var(--white);
+  paint-order: stroke fill;
+  text-shadow: 6px 6px 0px var(--black), 10px 10px 0px var(--red);
+}
+
+/* Red Atmospheric Glow */
+.p5-glow {
+  background: radial-gradient(circle, rgba(255,0,0,0.25) 0%, rgba(255,0,0,0) 60%);
 }

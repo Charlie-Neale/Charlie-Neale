@@ -3,7 +3,7 @@ import "@fontsource/bebas-neue";
 import "@fontsource/bangers";
 import "@fontsource/rajdhani";
 import "./globals.css";
-import PageTransition from "@/components/PageTransition";
+import FlashProvider from "@/components/FlashProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,9 +25,9 @@ export default function RootLayout({
       } as React.CSSProperties}
     >
       <body className="antialiased">
-        <PageTransition>
+        <FlashProvider>
           {children}
-        </PageTransition>
+        </FlashProvider>
       </body>
     </html>
   );
