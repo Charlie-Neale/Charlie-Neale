@@ -1,17 +1,9 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import "@fontsource/bebas-neue";
+import "@fontsource/bangers";
+import "@fontsource/rajdhani";
 import "./globals.css";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import PageTransition from "@/components/PageTransition";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,11 +16,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html
+      lang="en"
+      style={{
+        "--font-bebas-neue": '"Bebas Neue", sans-serif',
+        "--font-bangers": '"Bangers", system-ui',
+        "--font-rajdhani": '"Rajdhani", sans-serif',
+      } as React.CSSProperties}
+    >
+      <body className="antialiased">
+        <PageTransition>
+          {children}
+        </PageTransition>
       </body>
     </html>
   );

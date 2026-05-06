@@ -1,0 +1,8 @@
+[
+  {
+    "title": "Project One",
+    "description": "Short description of what this does.",
+    "tech": ["React", "Node.js"],
+    "link": "https://github.com/yourusername/project-one"
+  }
+]

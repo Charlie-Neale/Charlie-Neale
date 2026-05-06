@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "year": "2023 - Present",
+    "role": "Senior Phantom Developer",
+    "company": "Heart Stealers Inc.",
+    "description": "Architected the primary metaverse navigation system and led a team of 4 phantom thieves through palace infiltration operations."
+  },
+  {
+    "id": 2,
+    "year": "2020 - 2023",
+    "role": "Full Stack Engineer",
+    "company": "Shujin Academy Tech",
+    "description": "Maintained the student portal and cognitive tracking application. Upgraded legacy systems and implemented modern security protocols."
+  },
+  {
+    "id": 3,
+    "year": "2018 - 2020",
+    "role": "Junior Developer",
+    "company": "Leblanc Cafe & Code",
+    "description": "Brewed excellent coffee and wrote clean, maintainable React code. Assisted in the development of the Mementos exploration tool."
+  }
+]
