@@ -20,9 +20,6 @@ html, body {
 body {
   background-color: var(--black);
   color: var(--white);
-  /* Enhanced halftone pattern overlay */
-  background-image: radial-gradient(rgba(255, 0, 0, 0.18) 2px, transparent 2.5px);
-  background-size: 12px 12px;
 }
 
 ::selection {

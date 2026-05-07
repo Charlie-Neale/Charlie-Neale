@@ -114,15 +114,6 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-start bg-[var(--black)] text-[var(--white)] overflow-hidden">
       
-      {/* Background Halftone Pattern */}
-      <div 
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          backgroundImage: 'radial-gradient(rgba(255, 0, 0, 0.35) 2px, transparent 2px)',
-          backgroundSize: '12px 12px'
-        }}
-      />
-
       {/* Canvas Glow Pass (CSS Pulse Animated) */}
       <canvas 
         ref={glowCanvasRef} 

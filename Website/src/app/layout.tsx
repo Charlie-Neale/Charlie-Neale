@@ -9,6 +9,7 @@ import "@fontsource/rajdhani/600.css";
 import "@fontsource/rajdhani/700.css";
 import "./globals.css";
 import FlashProvider from "@/components/FlashProvider";
+import InteractiveDotCanvas from "@/components/InteractiveDotCanvas";
 
 export const metadata: Metadata = {
   title: "Charlie Neale — Developer · Analyst · Builder",
@@ -32,6 +33,7 @@ export default function RootLayout({
       } as React.CSSProperties}
     >
       <body className="antialiased">
+        <InteractiveDotCanvas />
         <FlashProvider>
           {children}
         </FlashProvider>

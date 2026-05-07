@@ -34,15 +34,6 @@ export default function SectionPanel({ section, onBack }: { section: SectionType
   return (
     <div className="relative w-full h-full bg-[var(--black)] overflow-hidden flex flex-col">
 
-      {/* Background Halftone Pattern */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          backgroundImage: 'radial-gradient(rgba(255, 0, 0, 0.35) 2px, transparent 2px)',
-          backgroundSize: '12px 12px'
-        }}
-      />
-
       {/* Fixed Header */}
       <div className="absolute top-0 left-0 w-full z-50 pointer-events-none flex items-start justify-between px-6 sm:px-10 pt-6">
 
