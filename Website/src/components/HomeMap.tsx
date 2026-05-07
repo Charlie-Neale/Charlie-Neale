@@ -118,7 +118,7 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
       <div 
         className="absolute inset-0 pointer-events-none z-0"
         style={{
-          backgroundImage: 'radial-gradient(rgba(255, 0, 0, 0.18) 2px, transparent 2px)',
+          backgroundImage: 'radial-gradient(rgba(255, 0, 0, 0.35) 2px, transparent 2px)',
           backgroundSize: '12px 12px'
         }}
       />
@@ -221,8 +221,8 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
           cardRotation={-5}
           delay={1.2}
           direction="right"
-          top="22%"
-          left="78%"
+          top="16%"
+          left="73%"
         />
       </div>
 
