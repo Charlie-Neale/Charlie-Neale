@@ -18,9 +18,7 @@ export default function SectionPanel({ section, onBack }: { section: SectionType
   const [isZoomComplete, setIsZoomComplete] = useState(false);
 
   useEffect(() => {
-    // Wait for the 400ms zoom animation to finish before mounting content
-    // so that the content's entry animations stagger AFTER the zoom.
-    const timer = setTimeout(() => setIsZoomComplete(true), 400);
+    const timer = setTimeout(() => setIsZoomComplete(true), 200);
     return () => clearTimeout(timer);
   }, []);
 
