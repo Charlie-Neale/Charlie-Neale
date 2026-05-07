@@ -11,6 +11,8 @@
   "dependencies": {
     "@fontsource/bangers": "^5.2.8",
     "@fontsource/bebas-neue": "^5.2.7",
+    "@fontsource/oswald": "^5.2.8",
+    "@fontsource/permanent-marker": "^5.2.7",
     "@fontsource/rajdhani": "^5.2.7",
     "framer-motion": "^12.38.0",
     "next": "14.2.35",

@@ -57,15 +57,13 @@ a, button, input, textarea, .p5-interactive {
   animation: boltPulse 3s ease-in-out infinite;
 }
 
-/* P5 Aggressive Heading Style */
+/* P5 Hard-Shadow Heading — Oswald 700, no blur */
 .p5-heading {
-  -webkit-text-fill-color: var(--red);
-  -webkit-text-stroke: 3px var(--white);
-  paint-order: stroke fill;
-  text-shadow: 6px 6px 0px var(--black), 10px 10px 0px var(--red);
+  font-family: var(--font-oswald);
+  font-weight: 700;
+  color: var(--red);
+  text-shadow: 3px 3px 0px #000000;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.3);
 }
 
-/* Red Atmospheric Glow */
-.p5-glow {
-  background: radial-gradient(circle, rgba(255,0,0,0.25) 0%, rgba(255,0,0,0) 60%);
-}
+

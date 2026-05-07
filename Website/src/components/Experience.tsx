@@ -47,13 +47,33 @@ export default function Experience({ direction = "center" }: { direction?: strin
         <div className="absolute left-[10px] sm:left-[20px] top-0 bottom-0 w-[6px] bg-[var(--red)] z-0" />
         
         {experienceData.length === 0 ? (
-          <div className="py-12 pl-8">
-            <p 
-              className="text-3xl text-gray-500 uppercase tracking-widest opacity-60"
-              style={{ fontFamily: 'var(--font-rajdhani)' }}
+          <div className="flex flex-col items-center justify-center py-24 pl-8 gap-6">
+            <div
+              style={{
+                fontFamily: 'var(--font-oswald)',
+                fontWeight: 900,
+                fontSize: '120px',
+                color: '#FFFFFF',
+                textTransform: 'uppercase',
+                lineHeight: 1,
+                WebkitTextStroke: '3px #000',
+                textShadow: '6px 6px 0px #FF0000',
+                transform: 'rotate(-8deg)',
+                display: 'block',
+              }}
             >
-              Experience coming soon...
-            </p>
+              SOON
+            </div>
+            <div
+              style={{
+                fontFamily: 'var(--font-marker)',
+                fontSize: '16px',
+                color: '#FF0000',
+                letterSpacing: '2px',
+              }}
+            >
+              check back later
+            </div>
           </div>
         ) : (
           <div className="flex flex-col gap-12 sm:gap-16 relative z-10">

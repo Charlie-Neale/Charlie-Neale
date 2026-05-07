@@ -1,8 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SectionType } from "./ZoomNav";
+import { LetterLabel, PROJECTS_NAV, EXPERIENCE_NAV, CONTACT_NAV } from "./LetterLabel";
+
+const NAV_CONFIGS = {
+  PROJECTS: PROJECTS_NAV,
+  EXPERIENCE: EXPERIENCE_NAV,
+  CONTACT: CONTACT_NAV,
+} as const;
 
 export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionType, x?: number, y?: number) => void }) {
   const glowCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -134,28 +141,43 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 150, damping: 15 }}
-          className="text-[59px] uppercase leading-none"
           style={{ 
-            fontFamily: 'var(--font-bebas-neue)',
-            color: 'var(--white)',
-            textShadow: '3px 3px 0px var(--red), 5px 5px 0px rgba(0,0,0,0.8)'
+            fontFamily: 'var(--font-oswald)',
+            fontWeight: 900,
+            fontSize: '42px',
+            lineHeight: 1,
+            color: '#FFFFFF',
+            textTransform: 'uppercase',
+            textShadow: '3px 3px 0px #FF0000',
+            WebkitTextStroke: '2px #FFFFFF',
           }}
         >
           Charlie Neale
         </motion.h1>
 
         <h2
-          className="text-[23px] mt-1 tracking-widest uppercase text-gray-300 drop-shadow-md"
-          style={{ fontFamily: 'var(--font-bebas-neue)' }}
+          style={{
+            fontFamily: 'var(--font-oswald)',
+            fontWeight: 400,
+            fontSize: '11px',
+            color: '#FFFFFF',
+            letterSpacing: '4px',
+            textTransform: 'uppercase',
+            marginTop: '6px',
+          }}
         >
           UNDERGRADUATE · UNIVERSITY OF TORONTO
         </h2>
 
         <h3
-          className="text-[20px] mt-[2px] tracking-wider uppercase drop-shadow-md"
-          style={{ fontFamily: 'var(--font-bangers)', color: 'rgba(255, 0, 0, 0.7)' }}
+          style={{
+            fontFamily: 'var(--font-marker)',
+            fontSize: '10px',
+            color: '#FF0000',
+            marginTop: '3px',
+          }}
         >
-          COMPUTER SCIENCE · LEADERSHIP · ASTROPHYSICS
+          Computer Science · Leadership · Astrophysics
         </h3>
       </div>
 
@@ -168,6 +190,7 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
           onNavigate={onNavigate}
           baseScale={1.0}
           rotation={-20}
+          cardRotation={-4}
           delay={0.8}
           direction="left"
           bottom="15%"
@@ -181,6 +204,7 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
           onNavigate={onNavigate}
           baseScale={0.75}
           rotation={10}
+          cardRotation={-2}
           delay={1.0}
           direction="left"
           top="28%"
@@ -194,6 +218,7 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
           onNavigate={onNavigate}
           baseScale={0.56}
           rotation={-15}
+          cardRotation={-5}
           delay={1.2}
           direction="right"
           top="20%"
@@ -205,7 +230,8 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
   );
 }
 
-// Helper component for perspective nodes
+
+// ── MapNode ────────────────────────────────────────────────────────────────
 const MapNode = ({ 
   label,
   section,
@@ -213,6 +239,7 @@ const MapNode = ({
   top, left, right, bottom, 
   baseScale, 
   rotation = 0,
+  cardRotation = 0,
   delay,
   direction
 }: { 
@@ -222,18 +249,18 @@ const MapNode = ({
   top?: string; left?: string; right?: string; bottom?: string;
   baseScale: number;
   rotation?: number;
+  cardRotation?: number;
   delay: number;
   direction: 'left' | 'right';
 }) => {
   const nodeRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleClick = () => {
     if (nodeRef.current) {
       const rect = nodeRef.current.getBoundingClientRect();
       const originX = rect.left + rect.width / 2;
       const originY = rect.top + rect.height / 2;
-      // Call onNavigate with the hardcoded section literal directly from this closure
-      console.log(`[MapNode] ${section} clicked — origin X:${originX} Y:${originY}`);
       onNavigate(section, originX, originY);
     }
   };
@@ -248,27 +275,39 @@ const MapNode = ({
         initial={{ x: direction === 'left' ? -150 : 150, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay, type: "spring", stiffness: 100, damping: 14 }}
-        whileHover={{ scale: 1.15 }}
+        whileHover={{ x: -3, y: -3 }}
         whileTap={{ scale: 0.95 }}
         onClick={handleClick}
-        className="group p5-interactive flex flex-col items-center"
+        onHoverStart={() => setIsHovered(true)}
+        onHoverEnd={() => setIsHovered(false)}
+        className="p5-interactive relative cursor-pointer"
+        style={{ transform: `rotate(${cardRotation}deg)` }}
       >
-        <div 
-          className="px-12 py-5 border-[5px] border-[#FF0000] bg-[var(--black)] text-[var(--white)] group-hover:bg-[#FF0000] transition-colors duration-200 shadow-[0_0_30px_8px_rgba(255,0,0,0.6)]"
-          style={{ 
-            clipPath: 'polygon(15% 0, 100% 0, 85% 100%, 0 100%)',
+        {/* Red offset stamp shadow behind */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            transform: isHovered ? 'translate(7px, 7px)' : 'translate(4px, 4px)',
+            transition: 'transform 0.15s ease',
+            background: '#FF0000',
+            clipPath: 'polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)',
+            zIndex: 0,
+          }}
+        />
+        {/* Letter cluster container */}
+        <div
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            padding: '8px 12px',
+            clipPath: 'polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)',
+            background: 'rgba(0,0,0,0.3)', // subtle backing so letters float above
+            boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.1)',
           }}
         >
-          <span className="text-6xl tracking-widest block drop-shadow-md" style={{ fontFamily: 'var(--font-bebas-neue)' }}>
-            {label}
-          </span>
+          <LetterLabel letterConfigs={NAV_CONFIGS[label as keyof typeof NAV_CONFIGS] ?? []} isHovered={isHovered} />
         </div>
-        <span 
-          className="mt-4 text-2xl tracking-[0.2em] text-[var(--red)] group-hover:text-[var(--white)] transition-colors drop-shadow-md" 
-          style={{ fontFamily: 'var(--font-bangers)', textShadow: '2px 2px 0px var(--black)' }}
-        >
-          CLICK TO ENTER
-        </span>
       </motion.div>
     </div>
   );
