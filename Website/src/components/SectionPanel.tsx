@@ -32,7 +32,7 @@ export default function SectionPanel({ section, onBack }: { section: SectionType
   };
 
   return (
-    <div className="relative w-full h-full bg-[var(--black)] overflow-hidden flex flex-col">
+    <div className="relative w-full h-full overflow-hidden flex flex-col">
 
       {/* Fixed Header */}
       <div className="absolute top-0 left-0 w-full z-50 pointer-events-none flex items-start justify-between px-6 sm:px-10 pt-6">

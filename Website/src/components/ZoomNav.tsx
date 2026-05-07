@@ -82,7 +82,7 @@ export default function ZoomNav() {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-[var(--black)]">
+    <div className="relative w-full h-screen overflow-hidden">
 
       {/* ── Map container — always mounted, animated as a single unit ── */}
       <motion.div

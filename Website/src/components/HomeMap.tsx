@@ -112,7 +112,7 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
 
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-start bg-[var(--black)] text-[var(--white)] overflow-hidden">
+    <div className="relative w-full h-full flex flex-col items-center justify-start text-[var(--white)] overflow-hidden">
       
       {/* Canvas Glow Pass (CSS Pulse Animated) */}
       <canvas 
