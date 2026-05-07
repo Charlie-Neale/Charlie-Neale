@@ -25,7 +25,7 @@ export default function SectionPanel({ section, onBack }: { section: SectionType
   const renderContent = () => {
     switch (section) {
       case "projects": return <Projects direction="bottom-left" />;
-      case "experience": return <Experience direction="center" />;
+      case "experience": return <Experience direction="bottom-left" />;
       case "contact": return <Contact direction="top-right" />;
       default: return null;
     }

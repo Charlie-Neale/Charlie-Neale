@@ -26,20 +26,6 @@ export default function Experience({ direction = "center" }: { direction?: strin
 
   return (
     <div className="w-full px-6 sm:px-16 lg:px-32 relative z-10 flex flex-col items-center">
-      
-      {/* Section Title */}
-      <div className="relative inline-block mb-20 ml-4 self-start">
-        <div 
-          className="absolute inset-0 bg-[var(--red)] transform -skew-x-12 -rotate-2 z-0"
-          style={{ clipPath: 'polygon(0 0, 100% 10%, 95% 100%, 5% 90%)' }}
-        />
-        <h2 
-          className="relative z-10 text-6xl sm:text-8xl uppercase tracking-wider px-8 py-2 text-[var(--white)] drop-shadow-md p5-heading"
-          style={{ fontFamily: 'var(--font-bebas-neue)' }}
-        >
-          EXPERIENCE
-        </h2>
-      </div>
 
       <div className="max-w-5xl w-full relative pl-8 sm:pl-16">
         
@@ -47,7 +33,12 @@ export default function Experience({ direction = "center" }: { direction?: strin
         <div className="absolute left-[10px] sm:left-[20px] top-0 bottom-0 w-[6px] bg-[var(--red)] z-0" />
         
         {experienceData.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-24 pl-8 gap-6">
+          <motion.div
+            initial={getInitial()}
+            animate={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, type: "spring", stiffness: 100, damping: 15 }}
+            className="flex flex-col items-center justify-center py-24 pl-8 gap-6"
+          >
             <div
               style={{
                 fontFamily: 'var(--font-oswald)',
@@ -74,7 +65,7 @@ export default function Experience({ direction = "center" }: { direction?: strin
             >
               check back later
             </div>
-          </div>
+          </motion.div>
         ) : (
           <div className="flex flex-col gap-12 sm:gap-16 relative z-10">
             {experienceData.map((item, index) => (
