@@ -63,21 +63,6 @@ export default function Contact({ direction = "top-right" }: { direction?: strin
       {/* Contact Form */}
       <div className="w-full max-w-4xl relative">
 
-        {/* Decorative asterisk */}
-        <div
-          className="absolute -top-12 -left-8 sm:-left-16 z-20 pointer-events-none"
-          style={{
-            fontFamily: 'var(--font-bangers)',
-            fontSize: '120px',
-            color: 'var(--gold)',
-            lineHeight: 0.5,
-            transform: 'rotate(15deg)',
-            opacity: 0.9,
-          }}
-        >
-          *
-        </div>
-
         <motion.div
           initial={getInitial()}
           animate={{ x: 0, y: 0, opacity: 1, scale: 1 }}
