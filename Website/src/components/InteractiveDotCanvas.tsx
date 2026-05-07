@@ -4,7 +4,7 @@ import { useEffect, useRef, useCallback } from 'react'
 const DOT_SPACING = 12
 const DOT_RADIUS = 2
 const MAX_RADIUS = 5.5
-const MAX_DISPLACEMENT = 15
+const MAX_DISPLACEMENT = 40
 const INFLUENCE_RADIUS = 120
 const LERP_SPEED = 0.12
 const DOT_COLOR = 'rgba(255, 0, 0, 0.35)'
