@@ -163,19 +163,11 @@ export default function About({ direction = "top-right" }: { direction?: string 
               }}
               className="self-start"
             >
-              <div
-                className="absolute inset-0 flex items-center justify-center"
-                style={{
-                  fontFamily: 'var(--font-bangers)',
-                  fontSize: '36px',
-                  color: '#FF0000',
-                  letterSpacing: '4px',
-                  textShadow: '3px 3px 0px #FFF',
-                  transform: 'rotate(-8deg)',
-                }}
-              >
-                PHOTO
-              </div>
+              <img
+                  src="/about/Me.jpg"
+                  alt="Charles Neale"
+                  className="absolute inset-0 w-full h-full object-cover"
+              />
             </div>
 
             {/* Name + description */}
@@ -201,7 +193,7 @@ export default function About({ direction = "top-right" }: { direction?: string 
                   maxWidth: '460px',
                 }}
               >
-                [A short description will go here — coming soon.]
+                Hi, I am an undergraduate at the University of Toronto studying Computer Science with a Focus on Leadership and Astrophysics. I love all things tech and space and when I'm not at my computer you can find me on stage performing Shakespeare, musicals or jazz trumpet. I love to lead and teach young minds in STEM by showing the fun in technology.
               </p>
             </div>
 
