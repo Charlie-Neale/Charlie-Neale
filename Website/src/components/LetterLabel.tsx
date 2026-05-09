@@ -61,7 +61,7 @@ export const EXPERIENCE_NAV: LetterCfg[] = [
     rotate: -13,            fontSize: 30, padding: '7px 10px', marginLeft: '-3px' },
 ];
 
-export const ABOUT_NAV: LetterCfg[] = [
+export const ABOUT_ME_NAV: LetterCfg[] = [
   { letter: 'A', bg: '#FFF', color: '#FF0000', border: '#FF0000',
     rotate: -12, skewX: -8, fontSize: 29, padding: '5px 8px' },
   { letter: 'B', bg: '#000', color: '#FFF', border: '#FF0000',
@@ -72,13 +72,10 @@ export const ABOUT_NAV: LetterCfg[] = [
     rotate: 11,             fontSize: 28, marginLeft: '-3px' },
   { letter: 'T', bg: '#FF0000', color: '#FFF', border: '#000',
     rotate: -13, skewX: 7,  fontSize: 30, padding: '5px 8px', marginLeft: '-2px' },
-];
-
-export const ME_NAV: LetterCfg[] = [
   { letter: 'M', bg: '#000', color: '#FFF', border: '#FF0000',
-    rotate: -8,  skewX: -4, fontSize: 23, padding: '4px 7px' },
+    rotate: -8,  skewX: -4, fontSize: 28, padding: '5px 9px', marginLeft: '14px' },
   { letter: 'E', bg: '#FFF', color: '#FF0000', border: '#FF0000',
-    rotate: 10,             fontSize: 25, padding: '4px 8px', marginLeft: '-2px' },
+    rotate: 10,             fontSize: 30, padding: '5px 8px', marginLeft: '-2px' },
 ];
 
 // ── PANEL TITLE CONFIGS (~46–68px, 2× nav size) ───────────────────────────────

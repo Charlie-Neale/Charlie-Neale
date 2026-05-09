@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { SectionType } from "./ZoomNav";
-import { LetterLabel, PROJECTS_NAV, EXPERIENCE_NAV, ABOUT_NAV, ME_NAV, LetterCfg } from "./LetterLabel";
+import { LetterLabel, PROJECTS_NAV, EXPERIENCE_NAV, ABOUT_ME_NAV } from "./LetterLabel";
 
 const NAV_CONFIGS = {
   PROJECTS: PROJECTS_NAV,
   EXPERIENCE: EXPERIENCE_NAV,
-  ABOUT: ABOUT_NAV,
+  "ABOUT ME": ABOUT_ME_NAV,
 } as const;
 
 export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionType, x?: number, y?: number) => void }) {
