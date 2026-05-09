@@ -135,7 +135,7 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
           style={{ 
             fontFamily: 'var(--font-oswald)',
             fontWeight: 900,
-            fontSize: '42px',
+            fontSize: '60px',
             lineHeight: 1,
             color: '#FFFFFF',
             textTransform: 'uppercase',
@@ -150,7 +150,7 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
           style={{
             fontFamily: 'var(--font-oswald)',
             fontWeight: 400,
-            fontSize: '11px',
+            fontSize: '16px',
             color: '#FFFFFF',
             letterSpacing: '4px',
             textTransform: 'uppercase',
@@ -163,12 +163,12 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
         <h3
           style={{
             fontFamily: 'var(--font-marker)',
-            fontSize: '10px',
+            fontSize: '14px',
             color: '#FF0000',
             marginTop: '3px',
           }}
         >
-          Computer Science · Leadership · Astrophysics
+          Computer Science · Astrophysics · Leadership
         </h3>
       </div>
 
@@ -184,8 +184,8 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
           cardRotation={-4}
           delay={0.8}
           direction="left"
-          bottom="15%"
-          left="30%"
+          bottom="12%"
+          left="25%"
         />
 
         {/* EXPERIENCE */}
@@ -193,28 +193,27 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
           label="EXPERIENCE"
           section="experience"
           onNavigate={onNavigate}
-          baseScale={0.75}
+          baseScale={1.0}
           rotation={10}
           cardRotation={-2}
           delay={1.0}
           direction="left"
-          top="28%"
+          top="30%"
           left="28%"
         />
 
         {/* ABOUT ME */}
         <MapNode
-          label="ABOUT"
-          subConfig={ME_NAV}
+          label="ABOUT ME"
           section="about"
           onNavigate={onNavigate}
-          baseScale={0.62}
+          baseScale={1.0}
           rotation={-15}
           cardRotation={-5}
           delay={1.2}
           direction="right"
-          top="14%"
-          left="73%"
+          top="18%"
+          left="80%"
         />
       </div>
 

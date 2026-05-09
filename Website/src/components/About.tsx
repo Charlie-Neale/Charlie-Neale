@@ -193,7 +193,7 @@ export default function About({ direction = "top-right" }: { direction?: string 
                   maxWidth: '460px',
                 }}
               >
-                Hi, I am an undergraduate at the University of Toronto studying Computer Science with a Focus on Leadership and Astrophysics. I love all things tech and space and when I'm not at my computer you can find me on stage performing Shakespeare, musicals or jazz trumpet. I love to lead and teach young minds in STEM by showing the fun in technology.
+                Hi, I am an undergraduate at the University of Toronto studying Computer Science with a Focus on Leadership and Astrophysics. I love all things tech and space and when I'm not at my computer you can find me on stage performing Shakespeare, musicals or jazz trumpet.
               </p>
             </div>
 
