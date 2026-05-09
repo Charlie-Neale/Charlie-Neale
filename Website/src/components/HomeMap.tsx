@@ -225,7 +225,6 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
 // ── MapNode ────────────────────────────────────────────────────────────────
 const MapNode = ({
   label,
-  subConfig,
   section,
   onNavigate,
   top, left, right, bottom,
@@ -236,7 +235,6 @@ const MapNode = ({
   direction
 }: {
   label: string;
-  subConfig?: LetterCfg[];
   section: "projects" | "experience" | "about";
   onNavigate: (section: "projects" | "experience" | "about", x: number, y: number) => void;
   top?: string; left?: string; right?: string; bottom?: string;
@@ -304,9 +302,6 @@ const MapNode = ({
           }}
         >
           <LetterLabel letterConfigs={NAV_CONFIGS[label as keyof typeof NAV_CONFIGS] ?? []} isHovered={isHovered} />
-          {subConfig && (
-            <LetterLabel letterConfigs={subConfig} isHovered={isHovered} />
-          )}
         </div>
       </motion.div>
     </div>
