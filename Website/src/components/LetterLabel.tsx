@@ -61,21 +61,24 @@ export const EXPERIENCE_NAV: LetterCfg[] = [
     rotate: -13,            fontSize: 30, padding: '7px 10px', marginLeft: '-3px' },
 ];
 
-export const CONTACT_NAV: LetterCfg[] = [
-  { letter: 'C', bg: '#FFF', color: '#FF0000', border: '#FF0000',
+export const ABOUT_NAV: LetterCfg[] = [
+  { letter: 'A', bg: '#FFF', color: '#FF0000', border: '#FF0000',
     rotate: -12, skewX: -8, fontSize: 29, padding: '5px 8px' },
-  { letter: 'O', bg: '#000', color: '#FFF',
-    rotate: 4,              fontSize: 25, padding: '3px 8px', marginLeft: '-2px' },
-  { letter: 'N', bg: '#FFF', color: '#000', border: '#000', outline: '#FF0000',
+  { letter: 'B', bg: '#000', color: '#FFF', border: '#FF0000',
+    rotate: 5,              fontSize: 26, padding: '4px 8px', marginLeft: '-2px' },
+  { letter: 'O', bg: '#FFF', color: '#000', border: '#000', outline: '#FF0000',
     rotate: -6,  skewX: 5,  fontSize: 24, padding: '5px 9px' },
-  { letter: 'T', bg: '#000', color: '#FFF', border: '#FF0000',
-    rotate: 9,   skewX: -4, fontSize: 27, padding: '4px 7px', marginLeft: '-2px' },
-  { letter: 'A', noBox: true, color: '#FFF',
-    rotate: -13,            fontSize: 30, marginLeft: '-3px' },
-  { letter: 'C', bg: '#000', color: '#FFF', border: '#FF0000',
-    rotate: -5,  skewX: 6,  fontSize: 24, padding: '3px 7px' },
-  { letter: 'T', bg: '#FFF', color: '#FF0000', border: '#FF0000',
-    rotate: 12,  skewX: 8,  fontSize: 29, padding: '5px 8px', marginLeft: '-2px' },
+  { letter: 'U', noBox: true, color: '#FFF',
+    rotate: 11,             fontSize: 28, marginLeft: '-3px' },
+  { letter: 'T', bg: '#FF0000', color: '#FFF', border: '#000',
+    rotate: -13, skewX: 7,  fontSize: 30, padding: '5px 8px', marginLeft: '-2px' },
+];
+
+export const ME_NAV: LetterCfg[] = [
+  { letter: 'M', bg: '#000', color: '#FFF', border: '#FF0000',
+    rotate: -8,  skewX: -4, fontSize: 23, padding: '4px 7px' },
+  { letter: 'E', bg: '#FFF', color: '#FF0000', border: '#FF0000',
+    rotate: 10,             fontSize: 25, padding: '4px 8px', marginLeft: '-2px' },
 ];
 
 // ── PANEL TITLE CONFIGS (~46–68px, 2× nav size) ───────────────────────────────
@@ -122,21 +125,24 @@ export const EXPERIENCE_PANEL: LetterCfg[] = [
     rotate: -13,            fontSize: 60, padding: '14px 20px', marginLeft: '-6px' },
 ];
 
-export const CONTACT_PANEL: LetterCfg[] = [
-  { letter: 'C', bg: '#FFF', color: '#FF0000', border: '#FF0000',
+export const ABOUT_PANEL: LetterCfg[] = [
+  { letter: 'A', bg: '#FFF', color: '#FF0000', border: '#FF0000',
     rotate: -12, skewX: -8, fontSize: 58, padding: '10px 16px' },
-  { letter: 'O', bg: '#000', color: '#FFF',
-    rotate: 4,              fontSize: 50, padding: '6px 16px', marginLeft: '-4px' },
-  { letter: 'N', bg: '#FFF', color: '#000', border: '#000', outline: '#FF0000',
+  { letter: 'B', bg: '#000', color: '#FFF', border: '#FF0000',
+    rotate: 5,              fontSize: 52, padding: '8px 14px', marginLeft: '-4px' },
+  { letter: 'O', bg: '#FFF', color: '#000', border: '#000', outline: '#FF0000',
     rotate: -6,  skewX: 5,  fontSize: 48, padding: '10px 18px' },
-  { letter: 'T', bg: '#000', color: '#FFF', border: '#FF0000',
-    rotate: 9,   skewX: -4, fontSize: 54, padding: '8px 14px', marginLeft: '-4px' },
-  { letter: 'A', noBox: true, color: '#FFF',
-    rotate: -13,            fontSize: 60, marginLeft: '-6px' },
-  { letter: 'C', bg: '#000', color: '#FFF', border: '#FF0000',
-    rotate: -5,  skewX: 6,  fontSize: 48, padding: '6px 14px' },
-  { letter: 'T', bg: '#FFF', color: '#FF0000', border: '#FF0000',
-    rotate: 12,  skewX: 8,  fontSize: 58, padding: '10px 16px', marginLeft: '-4px' },
+  { letter: 'U', noBox: true, color: '#FFF',
+    rotate: 11,             fontSize: 56, marginLeft: '-6px' },
+  { letter: 'T', bg: '#FF0000', color: '#FFF', border: '#000',
+    rotate: -13, skewX: 7,  fontSize: 60, padding: '10px 16px', marginLeft: '-4px' },
+];
+
+export const ME_PANEL: LetterCfg[] = [
+  { letter: 'M', bg: '#000', color: '#FFF', border: '#FF0000',
+    rotate: -8,  skewX: -4, fontSize: 48, padding: '8px 14px' },
+  { letter: 'E', bg: '#FFF', color: '#FF0000', border: '#FF0000',
+    rotate: 10,             fontSize: 52, padding: '8px 14px', marginLeft: '-4px' },
 ];
 
 // ── MEDIUM CONFIGS for decorative headers (~38–46px) ─────────────────────────
@@ -169,6 +175,23 @@ export const NEALE_MEDIUM: LetterCfg[] = [
     rotate: 6,              fontSize: 40, padding: '7px 8px' },
   { letter: 'E', bg: '#000', color: '#FF0000', border: '#000',
     rotate: -8,  skewX: 7,  fontSize: 44, padding: '8px 12px', marginLeft: '-3px' },
+];
+
+export const CHARLES_MEDIUM: LetterCfg[] = [
+  { letter: 'C', bg: '#FFF', color: '#FF0000', border: '#FF0000',
+    rotate: -10,            fontSize: 44, padding: '7px 12px' },
+  { letter: 'H', bg: '#000', color: '#FFF', border: '#FF0000',
+    rotate: 5,   skewX: -4, fontSize: 40, padding: '5px 10px', marginLeft: '-2px' },
+  { letter: 'A', noBox: true, color: '#FFF',
+    rotate: -8,             fontSize: 46, marginLeft: '-3px' },
+  { letter: 'R', bg: '#FF0000', color: '#FFF',
+    rotate: 12,  skewX: 5,  fontSize: 38, padding: '6px 10px', marginLeft: '-2px' },
+  { letter: 'L', bg: '#FFF', color: '#000', border: '#000', outline: '#FF0000',
+    rotate: -6,             fontSize: 42, padding: '8px 8px' },
+  { letter: 'E', bg: '#000', color: '#FF0000', border: '#FF0000',
+    rotate: 9,              fontSize: 44, padding: '8px 10px', marginLeft: '-2px' },
+  { letter: 'S', noBox: true, color: '#FF0000',
+    rotate: -13, skewX: 6,  fontSize: 40, marginLeft: '-2px' },
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────────

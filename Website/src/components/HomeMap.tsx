@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { SectionType } from "./ZoomNav";
-import { LetterLabel, PROJECTS_NAV, EXPERIENCE_NAV, CONTACT_NAV } from "./LetterLabel";
+import { LetterLabel, PROJECTS_NAV, EXPERIENCE_NAV, ABOUT_NAV, ME_NAV, LetterCfg } from "./LetterLabel";
 
 const NAV_CONFIGS = {
   PROJECTS: PROJECTS_NAV,
   EXPERIENCE: EXPERIENCE_NAV,
-  CONTACT: CONTACT_NAV,
+  ABOUT: ABOUT_NAV,
 } as const;
 
 export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionType, x?: number, y?: number) => void }) {
@@ -202,17 +202,18 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
           left="28%"
         />
 
-        {/* CONTACT */}
-        <MapNode 
-          label="CONTACT"
-          section="contact"
+        {/* ABOUT ME */}
+        <MapNode
+          label="ABOUT"
+          subConfig={ME_NAV}
+          section="about"
           onNavigate={onNavigate}
-          baseScale={0.56}
+          baseScale={0.62}
           rotation={-15}
           cardRotation={-5}
           delay={1.2}
           direction="right"
-          top="16%"
+          top="14%"
           left="73%"
         />
       </div>
@@ -223,20 +224,22 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
 
 
 // ── MapNode ────────────────────────────────────────────────────────────────
-const MapNode = ({ 
+const MapNode = ({
   label,
+  subConfig,
   section,
   onNavigate,
-  top, left, right, bottom, 
-  baseScale, 
+  top, left, right, bottom,
+  baseScale,
   rotation = 0,
   cardRotation = 0,
   delay,
   direction
-}: { 
+}: {
   label: string;
-  section: "projects" | "experience" | "contact";
-  onNavigate: (section: "projects" | "experience" | "contact", x: number, y: number) => void;
+  subConfig?: LetterCfg[];
+  section: "projects" | "experience" | "about";
+  onNavigate: (section: "projects" | "experience" | "about", x: number, y: number) => void;
   top?: string; left?: string; right?: string; bottom?: string;
   baseScale: number;
   rotation?: number;
@@ -295,9 +298,16 @@ const MapNode = ({
             clipPath: 'polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)',
             background: 'rgba(0,0,0,0.3)', // subtle backing so letters float above
             boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.1)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '2px',
           }}
         >
           <LetterLabel letterConfigs={NAV_CONFIGS[label as keyof typeof NAV_CONFIGS] ?? []} isHovered={isHovered} />
+          {subConfig && (
+            <LetterLabel letterConfigs={subConfig} isHovered={isHovered} />
+          )}
         </div>
       </motion.div>
     </div>

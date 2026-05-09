@@ -5,13 +5,13 @@ import { useState, useEffect } from "react";
 import { SectionType } from "./ZoomNav";
 import Projects from "./Projects";
 import Experience from "./Experience";
-import Contact from "./Contact";
-import { LetterLabel, PROJECTS_PANEL, EXPERIENCE_PANEL, CONTACT_PANEL } from "./LetterLabel";
+import About from "./About";
+import { LetterLabel, PROJECTS_PANEL, EXPERIENCE_PANEL, ABOUT_PANEL, ME_PANEL } from "./LetterLabel";
 
 const PANEL_CONFIGS = {
   projects: PROJECTS_PANEL,
   experience: EXPERIENCE_PANEL,
-  contact: CONTACT_PANEL,
+  about: ABOUT_PANEL,
 } as const;
 
 export default function SectionPanel({ section, onBack }: { section: SectionType, onBack: () => void }) {
@@ -26,7 +26,7 @@ export default function SectionPanel({ section, onBack }: { section: SectionType
     switch (section) {
       case "projects": return <Projects direction="bottom-left" />;
       case "experience": return <Experience direction="bottom-left" />;
-      case "contact": return <Contact direction="top-right" />;
+      case "about": return <About direction="top-right" />;
       default: return null;
     }
   };
@@ -79,9 +79,14 @@ export default function SectionPanel({ section, onBack }: { section: SectionType
           className="pointer-events-none flex items-center"
           style={{ paddingTop: '4px' }}
         >
-          {section && (
+          {section === "about" ? (
+            <div className="flex items-center gap-3">
+              <LetterLabel letterConfigs={ABOUT_PANEL} />
+              <LetterLabel letterConfigs={ME_PANEL} />
+            </div>
+          ) : section ? (
             <LetterLabel letterConfigs={PANEL_CONFIGS[section]} />
-          )}
+          ) : null}
         </motion.div>
 
       </div>

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import HomeMap from "./HomeMap";
 import SectionPanel from "./SectionPanel";
 
-export type SectionType = "projects" | "experience" | "contact" | null;
+export type SectionType = "projects" | "experience" | "about" | null;
 
 // ── Easing ────────────────────────────────────────────────────────────────────
 // Aggressive ease-in: starts slow, ends at full speed → feels like acceleration
