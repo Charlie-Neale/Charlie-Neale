@@ -175,13 +175,14 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
       {/* Map Nodes Overlaid on Canvas Path */}
       <div className="absolute inset-0 z-20 w-full h-full pointer-events-none">
         {/* PROJECTS */}
-        <MapNode 
+        <MapNode
           label="PROJECTS"
           section="projects"
           onNavigate={onNavigate}
           baseScale={1.2}
           rotation={-20}
           cardRotation={-4}
+          slashTilt={-7}
           delay={0.8}
           direction="left"
           bottom="12%"
@@ -189,13 +190,14 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
         />
 
         {/* EXPERIENCE */}
-        <MapNode 
+        <MapNode
           label="EXPERIENCE"
           section="experience"
           onNavigate={onNavigate}
           baseScale={1.0}
           rotation={10}
           cardRotation={-2}
+          slashTilt={11}
           delay={1.0}
           direction="left"
           top="30%"
@@ -210,6 +212,7 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
           baseScale={1.0}
           rotation={-15}
           cardRotation={-5}
+          slashTilt={-9}
           delay={1.2}
           direction="right"
           top="20%"
@@ -231,6 +234,7 @@ const MapNode = ({
   baseScale,
   rotation = 0,
   cardRotation = 0,
+  slashTilt = -7,
   delay,
   direction
 }: {
@@ -241,6 +245,7 @@ const MapNode = ({
   baseScale: number;
   rotation?: number;
   cardRotation?: number;
+  slashTilt?: number;
   delay: number;
   direction: 'left' | 'right';
 }) => {
@@ -266,7 +271,7 @@ const MapNode = ({
         initial={{ x: direction === 'left' ? -150 : 150, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay, type: "spring", stiffness: 100, damping: 14 }}
-        whileHover={{ x: -3, y: -3 }}
+        whileHover={{ scale: 1.12, x: -3, y: -3 }}
         whileTap={{ scale: 0.95 }}
         onClick={handleClick}
         onHoverStart={() => setIsHovered(true)}
@@ -286,6 +291,40 @@ const MapNode = ({
             zIndex: 0,
           }}
         />
+
+        {/* P5 Slash Hover — big jagged red shape (BEHIND letters, jelly wobble) */}
+        {isHovered && (
+          <div
+            className="p5-slash-flash pointer-events-none"
+            style={{
+              position: 'absolute',
+              inset: '-12px -28px',
+              transform: `rotate(${slashTilt}deg)`,
+              zIndex: 0,
+              filter: 'saturate(1.4)',
+            }}
+          >
+            <div
+              className="p5-jelly"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                opacity: 0.9,
+                animationDuration: '0.45s',
+                animationDelay: '0.08s',
+              }}
+            >
+              <svg
+                viewBox="0 0 110 47"
+                preserveAspectRatio="none"
+                style={{ width: '100%', height: '100%', overflow: 'visible' }}
+              >
+                <polygon fill="#FF0000" points="6,4 110,0 102,40 0,46" />
+              </svg>
+            </div>
+          </div>
+        )}
+
         {/* Letter cluster container */}
         <div
           style={{
@@ -303,6 +342,38 @@ const MapNode = ({
         >
           <LetterLabel letterConfigs={NAV_CONFIGS[label as keyof typeof NAV_CONFIGS] ?? []} isHovered={isHovered} />
         </div>
+
+        {/* P5 Slash Hover — thin white slash CUTTING THROUGH letters */}
+        {isHovered && (
+          <div
+            className="p5-slash-flash pointer-events-none"
+            style={{
+              position: 'absolute',
+              inset: '-12px -28px',
+              transform: `rotate(${slashTilt + 4}deg)`,
+              zIndex: 5,
+              mixBlendMode: 'screen',
+            }}
+          >
+            <div
+              className="p5-jelly"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                animationDuration: '0.4s',
+                animationDelay: '0.05s',
+              }}
+            >
+              <svg
+                viewBox="0 0 110 47"
+                preserveAspectRatio="none"
+                style={{ width: '100%', height: '100%', overflow: 'visible' }}
+              >
+                <polygon fill="#FFFFFF" points="-6,18 122,4 116,28 -2,36" />
+              </svg>
+            </div>
+          </div>
+        )}
       </motion.div>
     </div>
   );

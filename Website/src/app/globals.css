@@ -63,4 +63,34 @@ a, button, input, textarea, .p5-interactive {
   -webkit-text-stroke: 1px rgba(255,255,255,0.3);
 }
 
+/* P5 Hover Slash — wobbling jelly animation for shape overlays */
+@keyframes p5Jelly {
+  0% {
+    transform: scale(1.25, 1) skewX(20deg) translateY(3px) rotateX(40deg) rotateY(10deg) rotateZ(-10deg);
+  }
+  50% {
+    transform: scale(1.25, 1.1) skewX(-15deg) translateY(-2px) translateZ(-30px);
+  }
+  100% {
+    transform: scale(1.25, 1) skewX(20deg) translateY(3px) rotateX(-40deg) rotateY(-10deg) rotateZ(-15deg);
+  }
+}
+.p5-jelly {
+  animation-name: p5Jelly;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* Quick pop-in flash when slash overlay appears */
+@keyframes p5SlashFlash {
+  0%   { opacity: 0; }
+  30%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+.p5-slash-flash {
+  animation: p5SlashFlash 0.18s ease-out forwards;
+}
+
 
