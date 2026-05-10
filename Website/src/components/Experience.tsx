@@ -7,7 +7,8 @@ type CategoryKey = "work" | "awards" | "qualifications" | "education";
 
 type ExperienceItem = {
   title: string;
-  description?: string;
+  year?: string;
+  image?: string;
 };
 
 const CATEGORIES: { key: CategoryKey; label: string }[] = [
@@ -17,23 +18,30 @@ const CATEGORIES: { key: CategoryKey; label: string }[] = [
   { key: "education",      label: "EDUCATION" },
 ];
 
+// Drop image files into /public/education/ — paths below resolve from there.
+// e.g. public/education/uoft.png  →  src="/education/uoft.png"
 const DATA: Record<CategoryKey, ExperienceItem[]> = {
   work: [],
   awards: [],
   qualifications: [],
-  education: [],
+  education: [
+    { title: "University of Toronto",  year: "2025-Current", image: "/education/uoft.png" },
+    { title: "Kingston Grammar School", year: "2018-2025",   image: "/education/kingston-grammar.png" },
+  ],
 };
 
 const PLACEHOLDER_COUNT = 6;
 
-function padToPlaceholders(items: ExperienceItem[]): (ExperienceItem & { isPlaceholder: boolean })[] {
-  const real = items.map(i => ({ ...i, isPlaceholder: false }));
-  const fillerCount = Math.max(0, PLACEHOLDER_COUNT - real.length);
-  const filler = Array(fillerCount).fill(null).map(() => ({
-    title: "Coming Soon",
-    isPlaceholder: true,
-  }));
-  return [...real, ...filler];
+type DisplayItem = ExperienceItem & { isPlaceholder: boolean };
+
+function getDisplayItems(items: ExperienceItem[]): DisplayItem[] {
+  if (items.length === 0) {
+    return Array(PLACEHOLDER_COUNT).fill(null).map(() => ({
+      title: "Coming Soon",
+      isPlaceholder: true,
+    }));
+  }
+  return items.map(i => ({ ...i, isPlaceholder: false }));
 }
 
 const slideVariants = {
@@ -73,7 +81,10 @@ export default function Experience({ direction = "bottom-left" }: { direction?: 
   };
 
   const activeKey = CATEGORIES[activeIndex].key;
-  const items = padToPlaceholders(DATA[activeKey]);
+  const items = getDisplayItems(DATA[activeKey]);
+  const gridClass = items.length <= 2
+    ? "grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
+    : "grid grid-cols-3 gap-6";
 
   return (
     <div className="w-full px-6 sm:px-10 relative z-10 mt-4 pb-4">
@@ -133,7 +144,7 @@ export default function Experience({ direction = "bottom-left" }: { direction?: 
             animate="center"
             exit="exit"
             transition={{ type: "spring", stiffness: 120, damping: 18 }}
-            className="grid grid-cols-3 gap-6"
+            className={gridClass}
           >
             {items.map((item, index) => (
               <motion.div
@@ -148,24 +159,37 @@ export default function Experience({ direction = "bottom-left" }: { direction?: 
                   clipPath: 'polygon(5% 0, 100% 0, 95% 100%, 0 100%)',
                 }}
               >
-                <div
-                  className="w-full h-40 border-b-4 border-[var(--red)] flex items-center justify-center"
-                  style={{ background: '#0a0000' }}
-                >
-                  <span style={{
-                    fontFamily: 'var(--font-bebas-neue)',
-                    fontSize: '80px',
-                    color: '#FF0000',
-                    opacity: 0.2,
-                    lineHeight: 1,
-                  }}>?</span>
-                </div>
+                {item.image ? (
+                  <div className="w-full h-56 overflow-hidden relative border-b-4 border-[var(--red)] flex items-center justify-center"
+                    style={{ background: '#0a0000' }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-[var(--red)] opacity-15 mix-blend-multiply group-hover:opacity-0 transition-opacity duration-500" />
+                  </div>
+                ) : (
+                  <div
+                    className="w-full h-40 border-b-4 border-[var(--red)] flex items-center justify-center"
+                    style={{ background: '#0a0000' }}
+                  >
+                    <span style={{
+                      fontFamily: 'var(--font-bebas-neue)',
+                      fontSize: '80px',
+                      color: '#FF0000',
+                      opacity: 0.2,
+                      lineHeight: 1,
+                    }}>?</span>
+                  </div>
+                )}
 
                 <div className="relative z-10 p-5 flex flex-col flex-grow items-center text-center">
                   <h3 style={{
                     fontFamily: 'var(--font-oswald)',
                     fontWeight: 800,
-                    fontSize: '18px',
+                    fontSize: '20px',
                     color: '#FFFFFF',
                     textTransform: 'uppercase',
                     letterSpacing: '2px',
@@ -175,17 +199,29 @@ export default function Experience({ direction = "bottom-left" }: { direction?: 
                     {item.title}
                   </h3>
 
-                  <p
-                    className="text-xs text-gray-600 mt-1"
-                    style={{
-                      fontFamily: 'var(--font-rajdhani)',
-                      fontWeight: 500,
-                      letterSpacing: '2px',
+                  {item.year ? (
+                    <span style={{
+                      fontFamily: 'var(--font-bangers)',
+                      fontSize: '24px',
+                      color: '#FF0000',
+                      letterSpacing: '3px',
                       textTransform: 'uppercase',
-                    }}
-                  >
-                    More to come...
-                  </p>
+                    }}>
+                      {item.year}
+                    </span>
+                  ) : (
+                    <p
+                      className="text-xs text-gray-600 mt-1"
+                      style={{
+                        fontFamily: 'var(--font-rajdhani)',
+                        fontWeight: 500,
+                        letterSpacing: '2px',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      More to come...
+                    </p>
+                  )}
                 </div>
               </motion.div>
             ))}
