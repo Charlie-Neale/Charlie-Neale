@@ -9,6 +9,7 @@ type ExperienceItem = {
   title: string;
   year?: string;
   image?: string;
+  isPlaceholder?: boolean;
 };
 
 const CATEGORIES: { key: CategoryKey; label: string }[] = [
@@ -18,19 +19,28 @@ const CATEGORIES: { key: CategoryKey; label: string }[] = [
   { key: "education",      label: "EDUCATION" },
 ];
 
-// Drop image files into /public/education/ — paths below resolve from there.
+// Drop image files into /public/<category>/ — paths below resolve from there.
 // e.g. public/education/uoft.png  →  src="/education/uoft.png"
 const DATA: Record<CategoryKey, ExperienceItem[]> = {
-  work: [],
-  awards: [],
-  qualifications: [],
+  work: [
+    { title: "Junior Deep Engineering Outreach", year: "2026",      image: "/work/jdeo.png" },
+    { title: "St M's Gym",                       year: "2024-2025", image: "/work/st-marys-gym.png" },
+  ],
+  awards: [
+    { title: "School Captain",                  year: "2024-2025", image: "/awards/school-captain.png" },
+    { title: "Design & Technology Scholarship", year: "2023-2025", image: "/awards/dt-scholarship.png" },
+  ],
+  qualifications: [
+    { title: "ILM Level 3 Leadership Qualification", year: "2024", image: "/qualifications/ilm.png" },
+    { title: "Coming Soon", isPlaceholder: true },
+  ],
   education: [
-    { title: "University of Toronto",  year: "2025-Current", image: "/education/uoft.png" },
-    { title: "Kingston Grammar School", year: "2018-2025",   image: "/education/kingston-grammar.png" },
+    { title: "University of Toronto",   year: "2025-Current", image: "/education/uoft.png" },
+    { title: "Kingston Grammar School", year: "2018-2025",    image: "/education/kingston-grammar.jpg" },
   ],
 };
 
-const PLACEHOLDER_COUNT = 6;
+const PLACEHOLDER_COUNT = 4;
 
 type DisplayItem = ExperienceItem & { isPlaceholder: boolean };
 
@@ -41,7 +51,7 @@ function getDisplayItems(items: ExperienceItem[]): DisplayItem[] {
       isPlaceholder: true,
     }));
   }
-  return items.map(i => ({ ...i, isPlaceholder: false }));
+  return items.map(i => ({ ...i, isPlaceholder: i.isPlaceholder ?? false }));
 }
 
 const slideVariants = {
@@ -82,9 +92,7 @@ export default function Experience({ direction = "bottom-left" }: { direction?: 
 
   const activeKey = CATEGORIES[activeIndex].key;
   const items = getDisplayItems(DATA[activeKey]);
-  const gridClass = items.length <= 2
-    ? "grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
-    : "grid grid-cols-3 gap-6";
+  const gridClass = "grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto";
 
   return (
     <div className="w-full px-6 sm:px-10 relative z-10 mt-4 pb-4">
