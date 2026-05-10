@@ -1,124 +1,196 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
 
-export type ExperienceItem = {
-  id: number;
-  role: string;
-  company: string;
-  year: string;
-  description: string;
+type CategoryKey = "work" | "awards" | "qualifications" | "education";
+
+type ExperienceItem = {
+  title: string;
+  description?: string;
 };
 
-// Ready to be filled with data later
-const experienceData: ExperienceItem[] = [];
+const CATEGORIES: { key: CategoryKey; label: string }[] = [
+  { key: "work",           label: "WORK" },
+  { key: "awards",         label: "AWARDS" },
+  { key: "qualifications", label: "QUALIFICATIONS" },
+  { key: "education",      label: "EDUCATION" },
+];
 
-export default function Experience({ direction = "center" }: { direction?: string }) {
-  
+const DATA: Record<CategoryKey, ExperienceItem[]> = {
+  work: [],
+  awards: [],
+  qualifications: [],
+  education: [],
+};
+
+const PLACEHOLDER_COUNT = 6;
+
+function padToPlaceholders(items: ExperienceItem[]): (ExperienceItem & { isPlaceholder: boolean })[] {
+  const real = items.map(i => ({ ...i, isPlaceholder: false }));
+  const fillerCount = Math.max(0, PLACEHOLDER_COUNT - real.length);
+  const filler = Array(fillerCount).fill(null).map(() => ({
+    title: "Coming Soon",
+    isPlaceholder: true,
+  }));
+  return [...real, ...filler];
+}
+
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? "100%" : "-100%",
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => ({
+    x: direction > 0 ? "-100%" : "100%",
+    opacity: 0,
+  }),
+};
+
+export default function Experience({ direction = "bottom-left" }: { direction?: string }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const slideDirection = useRef(0);
+  const prevIndex = useRef(0);
+
+  const handleSelect = (next: number) => {
+    if (next === activeIndex) return;
+    slideDirection.current = next > prevIndex.current ? 1 : -1;
+    prevIndex.current = next;
+    setActiveIndex(next);
+  };
+
   const getInitial = () => {
-    switch(direction) {
-      case "bottom-left": return { opacity: 0, x: -800, y: 800 };
-      case "center": return { opacity: 0, scale: 0.2 };
-      case "top-right": return { opacity: 0, x: 800, y: -800 };
-      default: return { opacity: 0, x: 100, skewX: -5 };
+    switch (direction) {
+      case "bottom-left": return { opacity: 0, x: -80, y: 80 };
+      case "center":      return { opacity: 0, scale: 0.2 };
+      case "top-right":   return { opacity: 0, x: 80, y: -80 };
+      default:            return { opacity: 0, y: 50 };
     }
   };
 
+  const activeKey = CATEGORIES[activeIndex].key;
+  const items = padToPlaceholders(DATA[activeKey]);
+
   return (
-    <div className="w-full px-6 sm:px-16 lg:px-32 relative z-10 flex flex-col items-center">
+    <div className="w-full px-6 sm:px-10 relative z-10 mt-4 pb-4">
 
-      <div className="max-w-5xl w-full relative pl-8 sm:pl-16">
-        
-        {/* Continuous red timeline line down the left side */}
-        <div className="absolute left-[10px] sm:left-[20px] top-0 bottom-0 w-[6px] bg-[var(--red)] z-0" />
-        
-        {experienceData.length === 0 ? (
-          <motion.div
-            initial={getInitial()}
-            animate={{ x: 0, y: 0, opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, type: "spring", stiffness: 100, damping: 15 }}
-            className="flex flex-col items-center justify-center py-24 pl-8 gap-6"
-          >
-            <div
+      {/* Toggle bar */}
+      <motion.div
+        initial={getInitial()}
+        animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+        transition={{ duration: 0.5, type: "spring", stiffness: 120, damping: 16 }}
+        className="flex flex-wrap justify-center gap-3 sm:gap-5 mb-10"
+      >
+        {CATEGORIES.map((cat, i) => {
+          const isActive = i === activeIndex;
+          return (
+            <motion.button
+              key={cat.key}
+              onClick={() => handleSelect(i)}
+              whileHover={{ x: -3, scale: 1.04 }}
+              whileTap={{ scale: 0.94 }}
+              className="relative group"
               style={{
+                background: isActive ? '#FF0000' : '#000',
+                border: isActive ? '3px solid #000' : '3px solid #FF0000',
+                clipPath: 'polygon(10% 0, 100% 0, 90% 100%, 0 100%)',
+                padding: '10px 36px',
+                boxShadow: isActive ? '4px 4px 0px #000' : '4px 4px 0px #FF0000',
+                transition: 'background 0.2s, border-color 0.2s, box-shadow 0.2s',
+              }}
+            >
+              <span style={{
                 fontFamily: 'var(--font-oswald)',
-                fontWeight: 900,
-                fontSize: '120px',
-                color: '#FFFFFF',
+                fontWeight: 700,
+                fontSize: '15px',
+                color: '#FFF',
                 textTransform: 'uppercase',
-                lineHeight: 1,
-                WebkitTextStroke: '3px #000',
-                textShadow: '6px 6px 0px #FF0000',
-                transform: 'rotate(-8deg)',
+                letterSpacing: '3px',
+                textShadow: isActive ? '2px 2px 0px #000' : '2px 2px 0px #FF0000',
                 display: 'block',
-              }}
-            >
-              SOON
-            </div>
-            <div
-              style={{
-                fontFamily: 'var(--font-marker)',
-                fontSize: '16px',
-                color: '#FF0000',
-                letterSpacing: '2px',
-              }}
-            >
-              check back later
-            </div>
-          </motion.div>
-        ) : (
-          <div className="flex flex-col gap-12 sm:gap-16 relative z-10">
-            {experienceData.map((item, index) => (
-              <div key={item.id} className="flex flex-col relative pl-8 sm:pl-12">
-                
-                {/* Timeline Node */}
-                <div className="absolute left-[-22px] sm:left-[-32px] top-[20px] w-[24px] h-[24px] bg-[var(--black)] border-[6px] border-[var(--white)] rotate-45 z-10" />
+                whiteSpace: 'nowrap',
+              }}>
+                {cat.label}
+              </span>
+              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity" />
+            </motion.button>
+          );
+        })}
+      </motion.div>
 
-                <motion.div 
-                  initial={getInitial()}
-                  animate={{ x: 0, y: 0, opacity: 1, scale: 1, skewX: 0 }}
-                  transition={{ duration: 0.6, type: "spring", stiffness: 100, damping: 15, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.02, x: 10 }}
-                  className="bg-[var(--black)] p-6 sm:p-10 relative border-[6px] border-[var(--red)] group"
-                  style={{ 
-                    clipPath: 'polygon(5% 0, 100% 0, 95% 100%, 0 100%)',
-                  }}
+      {/* Sliding grid */}
+      <div className="relative overflow-x-hidden">
+        <AnimatePresence mode="wait" custom={slideDirection.current} initial={false}>
+          <motion.div
+            key={activeKey}
+            custom={slideDirection.current}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ type: "spring", stiffness: 120, damping: 18 }}
+            className="grid grid-cols-3 gap-6"
+          >
+            {items.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: item.isPlaceholder ? 0.6 : 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.06, type: "spring", stiffness: 110, damping: 15 }}
+                className="group relative overflow-hidden flex flex-col"
+                style={{
+                  backgroundColor: 'var(--black)',
+                  border: '4px solid var(--red)',
+                  clipPath: 'polygon(5% 0, 100% 0, 95% 100%, 0 100%)',
+                }}
+              >
+                <div
+                  className="w-full h-40 border-b-4 border-[var(--red)] flex items-center justify-center"
+                  style={{ background: '#0a0000' }}
                 >
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
-                    <h3 
-                      className="text-4xl sm:text-5xl text-[var(--white)] uppercase tracking-wide" 
-                      style={{ fontFamily: 'var(--font-bebas-neue)' }}
-                    >
-                      {item.role}
-                    </h3>
-                    <span 
-                      className="text-3xl text-[var(--red)] uppercase tracking-wider mt-2 sm:mt-0" 
-                      style={{ fontFamily: 'var(--font-bangers)' }}
-                    >
-                      {item.year}
-                    </span>
-                  </div>
-                  
-                  <h4 
-                    className="text-2xl sm:text-3xl text-[var(--gold)] uppercase tracking-wide mb-4" 
-                    style={{ fontFamily: 'var(--font-bebas-neue)' }}
-                  >
-                    {item.company}
-                  </h4>
-                  <p 
-                    className="text-xl text-gray-300 leading-relaxed max-w-2xl" 
-                    style={{ fontFamily: 'var(--font-rajdhani)', fontWeight: 500 }}
-                  >
-                    {item.description}
-                  </p>
+                  <span style={{
+                    fontFamily: 'var(--font-bebas-neue)',
+                    fontSize: '80px',
+                    color: '#FF0000',
+                    opacity: 0.2,
+                    lineHeight: 1,
+                  }}>?</span>
+                </div>
 
-                  {/* Decorative background slash on hover */}
-                  <div className="absolute top-0 right-[-50px] w-[150px] h-full bg-[var(--red)] opacity-10 transform skew-x-[-30deg] pointer-events-none group-hover:bg-[var(--white)] transition-colors duration-300" />
-                </motion.div>
-              </div>
+                <div className="relative z-10 p-5 flex flex-col flex-grow items-center text-center">
+                  <h3 style={{
+                    fontFamily: 'var(--font-oswald)',
+                    fontWeight: 800,
+                    fontSize: '18px',
+                    color: '#FFFFFF',
+                    textTransform: 'uppercase',
+                    letterSpacing: '2px',
+                    textShadow: '2px 2px 0px #FF0000',
+                    marginBottom: '10px',
+                  }}>
+                    {item.title}
+                  </h3>
+
+                  <p
+                    className="text-xs text-gray-600 mt-1"
+                    style={{
+                      fontFamily: 'var(--font-rajdhani)',
+                      fontWeight: 500,
+                      letterSpacing: '2px',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    More to come...
+                  </p>
+                </div>
+              </motion.div>
             ))}
-          </div>
-        )}
+          </motion.div>
+        </AnimatePresence>
       </div>
 
     </div>
