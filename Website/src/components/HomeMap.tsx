@@ -212,8 +212,8 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
           cardRotation={-5}
           delay={1.2}
           direction="right"
-          top="18%"
-          left="80%"
+          top="20%"
+          left="70%"
         />
       </div>
 
