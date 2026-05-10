@@ -179,7 +179,7 @@ export default function HomeMap({ onNavigate }: { onNavigate: (section: SectionT
           label="PROJECTS"
           section="projects"
           onNavigate={onNavigate}
-          baseScale={1.0}
+          baseScale={1.2}
           rotation={-20}
           cardRotation={-4}
           delay={0.8}
