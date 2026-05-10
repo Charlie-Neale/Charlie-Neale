@@ -24,6 +24,12 @@ const INNER_JAG =
   ')';
 
 const PHOTO_CLIP = 'polygon(8% 0, 100% 0, 92% 100%, 0 100%)';
+const CHIP_CLIP = 'polygon(10% 0, 100% 0, 90% 100%, 0 100%)';
+
+const SKILLS = [
+  'Python', 'NumPy', 'Pandas', 'Java', 'C++', 'JavaScript',
+  'TypeScript', 'React', 'Next.js', 'SQL', 'Git', 'Linux',
+];
 
 type InfoRowProps = {
   label: string;
@@ -104,8 +110,8 @@ export default function About({ direction = "top-right" }: { direction?: string 
         initial={getInitial()}
         animate={{ x: 0, y: 0, opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, type: "spring", stiffness: 100, damping: 16 }}
-        className="w-full max-w-4xl relative"
-        style={{ minHeight: '640px' }}
+        className="w-full max-w-5xl relative"
+        style={{ minHeight: '720px' }}
       >
         {/* Outer black drop shadow — anchors the card */}
         <div
@@ -182,7 +188,7 @@ export default function About({ direction = "top-right" }: { direction?: string 
               {/* Description placeholder */}
               <p
                 style={{
-                  fontFamily: 'var(--font-rajdhani)',
+                  fontFamily: '"Courier New", Courier, monospace',
                   fontWeight: 500,
                   fontStyle: 'italic',
                   fontSize: '17px',
@@ -210,8 +216,69 @@ export default function About({ direction = "top-right" }: { direction?: string 
             }}
           />
 
-          {/* Info rows */}
+          {/* Skills */}
+          <div className="flex flex-col gap-4 pl-2 sm:pl-4">
+            <h3
+              style={{
+                fontFamily: 'var(--font-oswald)',
+                fontWeight: 700,
+                fontSize: '28px',
+                color: '#FF0000',
+                textTransform: 'uppercase',
+                letterSpacing: '4px',
+                textShadow: '3px 3px 0px #000',
+                transform: 'skewX(-8deg)',
+                margin: 0,
+              }}
+            >
+              Skills
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {SKILLS.map((skill, i) => {
+                const dark = i % 2 === 0;
+                return (
+                  <span
+                    key={skill}
+                    style={{
+                      fontFamily: 'var(--font-oswald)',
+                      fontWeight: 700,
+                      fontSize: '14px',
+                      color: dark ? '#FFFFFF' : '#000000',
+                      background: dark ? '#000000' : '#FFFFFF',
+                      border: '2px solid #FF0000',
+                      textTransform: 'uppercase',
+                      letterSpacing: '2px',
+                      padding: '6px 16px',
+                      clipPath: CHIP_CLIP,
+                      transform: `rotate(${((i % 3) - 1) * 1.2}deg) skewX(-6deg)`,
+                      textShadow: dark ? '2px 2px 0px #FF0000' : 'none',
+                      display: 'inline-block',
+                    }}
+                  >
+                    {skill}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Contact Me */}
           <div className="flex flex-col gap-4 sm:gap-5 pl-2 sm:pl-4">
+            <h3
+              style={{
+                fontFamily: 'var(--font-oswald)',
+                fontWeight: 700,
+                fontSize: '28px',
+                color: '#FF0000',
+                textTransform: 'uppercase',
+                letterSpacing: '4px',
+                textShadow: '3px 3px 0px #000',
+                transform: 'skewX(-8deg)',
+                margin: 0,
+              }}
+            >
+              Contact Me
+            </h3>
             <InfoRow
               label="EMAIL"
               value="charliefneale@outlook.com"
