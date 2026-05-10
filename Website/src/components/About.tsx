@@ -27,8 +27,7 @@ const PHOTO_CLIP = 'polygon(8% 0, 100% 0, 92% 100%, 0 100%)';
 const CHIP_CLIP = 'polygon(10% 0, 100% 0, 90% 100%, 0 100%)';
 
 const SKILLS = [
-  'Python', 'NumPy', 'Pandas', 'Java', 'C++', 'JavaScript',
-  'TypeScript', 'React', 'Next.js', 'SQL', 'Git', 'Linux',
+  'Python', 'NumPy', 'Pandas', 'TypeScript', 'Next.js', 'Git', 'Linux',
 ];
 
 type InfoRowProps = {
@@ -57,7 +56,7 @@ function InfoRow({ label, value, href, external, rotate, onClickFlash }: InfoRow
   );
 
   return (
-    <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
+    <div className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap">
       <span
         style={{
           fontFamily: 'var(--font-oswald)',
@@ -110,8 +109,8 @@ export default function About({ direction = "top-right" }: { direction?: string 
         initial={getInitial()}
         animate={{ x: 0, y: 0, opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, type: "spring", stiffness: 100, damping: 16 }}
-        className="w-full max-w-5xl relative"
-        style={{ minHeight: '720px' }}
+        className="w-full max-w-5xl relative mx-auto"
+        style={{ minHeight: '820px' }}
       >
         {/* Outer black drop shadow — anchors the card */}
         <div
@@ -153,9 +152,9 @@ export default function About({ direction = "top-right" }: { direction?: string 
         <div className="relative z-10 px-8 sm:px-14 py-12 sm:py-16 flex flex-col gap-8">
 
           {/* Top row: photo + name + description */}
-          <div className="flex flex-col sm:flex-row gap-8 sm:gap-10 items-start">
+          <div className="flex flex-col sm:flex-row gap-8 sm:gap-10 items-center justify-center">
 
-            {/* Photo placeholder — top left */}
+            {/* Photo placeholder */}
             <div
               style={{
                 width: '200px',
@@ -167,7 +166,6 @@ export default function About({ direction = "top-right" }: { direction?: string 
                 position: 'relative',
                 transform: 'rotate(-2deg)',
               }}
-              className="self-start"
             >
               <img
                   src="/about/Me.jpg"
@@ -177,10 +175,10 @@ export default function About({ direction = "top-right" }: { direction?: string 
             </div>
 
             {/* Name + description */}
-            <div className="flex flex-col gap-4 flex-1 min-w-0">
+            <div className="flex flex-col gap-4 items-center min-w-0">
 
               {/* CHARLES NEALE — chaos letters */}
-              <div className="flex items-center gap-4 flex-wrap">
+              <div className="flex items-center gap-4 flex-wrap justify-center">
                 <LetterLabel letterConfigs={CHARLES_MEDIUM} />
                 <LetterLabel letterConfigs={NEALE_MEDIUM} />
               </div>
@@ -197,6 +195,7 @@ export default function About({ direction = "top-right" }: { direction?: string 
                   opacity: 0.85,
                   marginTop: '8px',
                   maxWidth: '460px',
+                  textAlign: 'center',
                 }}
               >
                 Hi, I am an undergraduate at the University of Toronto studying Computer Science with a Focus on Leadership and Astrophysics. I love all things tech and space and when I'm not at my computer you can find me on stage performing Shakespeare, musicals or jazz trumpet.
@@ -217,7 +216,7 @@ export default function About({ direction = "top-right" }: { direction?: string 
           />
 
           {/* Skills */}
-          <div className="flex flex-col gap-4 pl-2 sm:pl-4">
+          <div className="flex flex-col gap-4 items-center">
             <h3
               style={{
                 fontFamily: 'var(--font-oswald)',
@@ -229,11 +228,12 @@ export default function About({ direction = "top-right" }: { direction?: string 
                 textShadow: '3px 3px 0px #000',
                 transform: 'skewX(-8deg)',
                 margin: 0,
+                textAlign: 'center',
               }}
             >
               Skills
             </h3>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 justify-center">
               {SKILLS.map((skill, i) => {
                 const dark = i % 2 === 0;
                 return (
@@ -263,7 +263,7 @@ export default function About({ direction = "top-right" }: { direction?: string 
           </div>
 
           {/* Contact Me */}
-          <div className="flex flex-col gap-4 sm:gap-5 pl-2 sm:pl-4">
+          <div className="flex flex-col gap-4 sm:gap-5 items-center">
             <h3
               style={{
                 fontFamily: 'var(--font-oswald)',
@@ -275,6 +275,7 @@ export default function About({ direction = "top-right" }: { direction?: string 
                 textShadow: '3px 3px 0px #000',
                 transform: 'skewX(-8deg)',
                 margin: 0,
+                textAlign: 'center',
               }}
             >
               Contact Me
