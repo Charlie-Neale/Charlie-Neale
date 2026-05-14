@@ -27,7 +27,7 @@ const PHOTO_CLIP = 'polygon(8% 0, 100% 0, 92% 100%, 0 100%)';
 const CHIP_CLIP = 'polygon(10% 0, 100% 0, 90% 100%, 0 100%)';
 
 const SKILLS = [
-  'Python', 'NumPy', 'Pandas', 'TypeScript', 'Next.js', 'Git', 'Linux',
+  'Python', 'NumPy', 'Pandas', 'Streamlit', 'Plotly', 'TypeScript', 'Next.js', 'Git', 'Linux',
 ];
 
 type InfoRowProps = {

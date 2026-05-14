@@ -24,10 +24,10 @@ const CATEGORIES: { key: CategoryKey; label: string }[] = [
 const DATA: Record<CategoryKey, ExperienceItem[]> = {
   work: [
     { title: "Junior Deep Engineering Outreach", year: "2026",      image: "/work/jdeo.png" },
-    { title: "St M's Gym",                       year: "2024-2025", image: "/work/st-marys-gym.png" },
+    { title: "St M's Gym",                       year: "2024-2025", image: "/work/st-marys-gym.jpeg" },
   ],
   awards: [
-    { title: "School Captain",                  year: "2024-2025", image: "/awards/school-captain.png" },
+    { title: "School Captain",                  year: "2024-2025", image: "/awards/school-captain.JPG" },
     { title: "Design & Technology Scholarship", year: "2023-2025", image: "/awards/dt-scholarship.png" },
   ],
   qualifications: [

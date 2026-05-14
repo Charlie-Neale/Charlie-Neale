@@ -5,5 +5,12 @@
     "tech": ["Python", "Scikit-Learn", "Pandas"],
     "link": "https://github.com/Charlie-Neale/march-madness-predictor",
     "image": "https://opengraph.githubassets.com/1/Charlie-Neale/march-madness-predictor"
+  },
+  {
+    "title": "SN Ia Peculiar Velocity Anomaly Detector",
+    "description": "Flags Type Ia supernovae from the Fink ZTF stream whose host-galaxy redshift disagrees with the standard-candle redshift by more than 1000 km/s.",
+    "tech": ["Python", "Astropy", "Pandas", "Streamlit", "Plotly"],
+    "link": "https://github.com/Charlie-Neale/Rubin-redshift-anomalie-detector",
+    "image": "/projects/rubin-redshift.png"
   }
 ]
